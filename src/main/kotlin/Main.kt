@@ -1,12 +1,16 @@
 
 fun main() {
-    val n = "00001101"
+    val n = listOf<Int>(1, 2, 3)
+    val k = 6
+    var count = 0
 
-    var ans = 0
-    for(c in n){
-        val x = c.digitToInt()
-        ans = ans*2 + x
+    for (x in n) {
+        for (y in n) {
+            val z = k - x - y
+            if (k == x + y + z && n.contains(z)) {
+                count++
+
+            }
+        }
     }
-    println(ans)
-
 }
