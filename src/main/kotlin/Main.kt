@@ -1,17 +1,32 @@
 
 fun main() {
-    val (n, m, k) = readLine()!!.split(" ").map { it.toInt() }
-    val a = readLine()!!.split(" ").map { it.toInt() }
-    val b = readLine()!!.split(" ").map { it.toInt() }
+    val goods = listOf<Int>(300, 300, 400, 900)
+    val sum = 1000
+    var found = false
 
-    for (i in 0 until n) {          // A のインデックスを回す
-        for (j in 0 until m) {      // B のインデックスを回す
-            if (a[i] + b[j] == k) { // A[i] と B[j] の和が K か？
-                println("Yes")
-                return
+    for (i in 0 until goods.size) {
+        for (j in i + 1 until goods.size) {
+            for (k in j + 1 until goods.size) {
+                if (goods[i] + goods[j] + goods[k] == sum) {
+                    found = true
+                }
             }
         }
     }
+    if (found) println("yes") else println("no")
+}
 
-    println("No")
+class GoodsChecker(private val goods: List<Int>) {
+    fun canMakeSum(target: Int): Boolean {
+        for (i in 0 until goods.size) {
+            for (j in i + 1 until goods.size) {
+                for (k in j + 1 until goods.size) {
+                    if (goods[i] + goods[j] + goods[k] == target) {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
+    }
 }
