@@ -1,13 +1,12 @@
 
-
 fun main() {
-    var n = 13
-    var bin = ""
-    while ( n > 0){
-        bin = (n % 2).toString()+ bin
-        n /= 2
+    val n = "00001101"
 
-
+    var ans = 0
+    for(c in n){
+        val x = c.digitToInt()
+        ans = ans*2 + x
     }
-    println(bin.padStart(10,'0'))
+    println(ans)
+
 }
