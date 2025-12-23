@@ -1,21 +1,21 @@
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val a = readLine()!!.split("").map { it.toInt() }
-    val s = IntArray(n + 1)
-    for (i in 0 until n) {
-        s[i + 1] = s[i] + a[i]
-    }
-    val q = readLine()!!.toInt()
+    val d = readLine()!!.toInt()
+    val n  = readLine()!!.toInt()
+    val xy = List(n){ readLine()!!.split("").map { it.toInt() }}
 
-    repeat(q) {
-        val (l, r) = readLine()!!.split("").map { it.toInt() }
+    val b = IntArray(d + 2)
+    for ((l,r) in xy){
+        b[l] += 1
+        b[r + 1] -= 1
     }
-    val wincount = s[r] - s[l - 1]
-    val total = r - l + 1
-    val losecount = total - wincount
 
-    if (wincount > losecount) println("win")
-    else if (wincount < losecount) println("lose")
-    else println("draw")
+    var current = 0
+    for(i in 1..d){
+        current += b[i]
+        println(current)
+    }
+
+
+
 }
