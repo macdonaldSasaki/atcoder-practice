@@ -1,28 +1,21 @@
 
 fun main() {
-    val n  = listOf(0,1,1,0,1,0,0)
-    val a = 7
-    val queries = listOf(
-        2 to 5,
-        2 to 7,
-        5 to 7,
-    )
-    val s = IntArray(a + 1)
-    for(i in 0 until a){
-        if(n[i] == 1){
-            s[i + 1] = s[i] + 1
-        }else{
-            s[i + 1] = s[i]
-        }
+    val n = readLine()!!.toInt()
+    val a = readLine()!!.split("").map { it.toInt() }
+    val s = IntArray(n + 1)
+    for (i in 0 until n) {
+        s[i + 1] = s[i] + a[i]
     }
-    for((l,r) in queries){
-        val count2 = s[r] - s[l - 1]
-        val total = r - l + 1
-        val count0 = total - count2
+    val q = readLine()!!.toInt()
 
-        if(count2 > total) println("win")
-        else if(count2 < total) println("lose")
-        else println("draw")
+    repeat(q) {
+        val (l, r) = readLine()!!.split("").map { it.toInt() }
     }
+    val wincount = s[r] - s[l - 1]
+    val total = r - l + 1
+    val losecount = total - wincount
 
+    if (wincount > losecount) println("win")
+    else if (wincount < losecount) println("lose")
+    else println("draw")
 }
