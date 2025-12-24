@@ -1,19 +1,20 @@
 
 fun main() {
-    val t = readLine()!!.toInt()
-    val  n = readLine()!!.toInt()
-    val xy = List(n){ readLine()!!.split(" ").map { it.toInt() }}
+    val (n,x)  = readLine()!!.split(" ").map { it.toInt() }
+    val a = readLine()!!.split(" ").map { it.toInt() }
 
-    val b = IntArray(t + 1)
-    for ((l,r) in xy ){
-        b[l] += 1
-        b[r] -= 1
-    }
-
-    var now = 0
-    for (i in 0 until t){
-        now = b[i] + now
-        println(now)
-    }
-
+    var l = 0
+    var r = n - 1
+     while (l <= r) {
+         var m = (l + r) / 2
+         if (x < a[m]) {
+             r = m - 1
+         } else if(x > a[m]){
+             l = m + 1
+             }else {
+                 println(m + 1)
+             return
+             }
+     }
 }
+
