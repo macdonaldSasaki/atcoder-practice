@@ -1,20 +1,28 @@
 
 fun main() {
-    val (n,x)  = readLine()!!.split(" ").map { it.toInt() }
-    val a = readLine()!!.split(" ").map { it.toInt() }
+    val (n,k) = readLine()!!.split(" ").map { it.toInt() }
+    val a = readLine()!!.split(" ").map { it.toLong() }
 
-    var l = 0
-    var r = n - 1
-     while (l <= r) {
-         var m = (l + r) / 2
-         if (x < a[m]) {
-             r = m - 1
-         } else if(x > a[m]){
-             l = m + 1
-             }else {
-                 println(m + 1)
-             return
-             }
-     }
+    var l = 1L
+    var r = 1_000_000_000L
+    var ans = r
+
+    while (l <= r) {
+        val mid = (l + r) / 2
+        var total = 0L
+        for(i in a){
+            total += mid / i
+            if(total >= k) break
+        }
+        if(total >= k){
+            ans = mid
+            r = mid - 1
+        }else{
+           l = mid + 1
+        }
+
+
+    }
+    println(ans)
 }
 
