@@ -21,6 +21,7 @@ fun main() {
 
 
     }
+    if(dp[n][s]) println("yes")else println("no")
 }
 
 
