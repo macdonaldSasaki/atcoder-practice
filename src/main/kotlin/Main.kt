@@ -1,17 +1,22 @@
+import kotlin.math.min
 
 fun main() {
-   val (n,k) = readLine()!!.split(" ").map { it.toInt() }
+   val n = readLine()!!.toInt()
    val a = readLine()!!.split(" ").map { it.toInt() }
+   val b = readLine()!!.split(" ").map { it.toInt() }
 
-   var r = 0
-   var ans = 0L
+    val alist = listOf(0,0) + a
+    val blist = listOf(0,0,0) + b
 
-   for(l in 0 until n){
-       while (r < n - 1 && a[r + 1] - a[l] <= k){
-           r++
-       }
-       ans += r - l
-   }
-    println(ans)
+
+    val dp = IntArray(n + 1)
+    dp[1] = 0
+    dp[2] = alist[2]
+
+    for(i in 3 until n + 1){
+        dp[i] = min(dp[i - 1] + alist[i] , dp[i - 2] + blist[i])
+    }
+    println(dp[n])
 }
+
 
