@@ -1,22 +1,26 @@
 import kotlin.math.min
 
 fun main() {
-   val n = readLine()!!.toInt()
-   val a = readLine()!!.split(" ").map { it.toInt() }
-   val b = readLine()!!.split(" ").map { it.toInt() }
+    val (n, s) = readLine()!!.split(" ").map { it.toInt() }
+    val a = readLine()!!.split(" ").map { it.toInt() }
 
-    val alist = listOf(0,0) + a
-    val blist = listOf(0,0,0) + b
+    val dp = Array(n + 1) { BooleanArray(s + 1) }
+    dp[0][0] = true
+
+    for (i in 1..n) {
+        val card = a[i - 1]
+        for (j in 0..s) {
+            val patternA = dp[i - 1][j]
+            val patternB = if(j >= card) dp[i -1][j - card] else false
+
+            if(patternA || patternB){
+                dp[i][j] = true
+            }
+
+        }
 
 
-    val dp = IntArray(n + 1)
-    dp[1] = 0
-    dp[2] = alist[2]
-
-    for(i in 3 until n + 1){
-        dp[i] = min(dp[i - 1] + alist[i] , dp[i - 2] + blist[i])
     }
-    println(dp[n])
 }
 
 
