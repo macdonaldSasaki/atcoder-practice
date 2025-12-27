@@ -1,29 +1,31 @@
 import kotlin.math.max
 
+fun main() {
+    val n = 100
+    // 1. 全部 True (素数) で初期化
+    val isPrime = BooleanArray(n + 1) { true }
 
-    fun isprime(x : Int) : Boolean {
-        if (x < 2) return false
-        var i = 2
-        while (i * i <= x) {
-            if (x % i == 0) {
-                return false
+    // 2. 0と1は素数じゃない
+    isPrime[0] = false
+    isPrime[1] = false
+
+    // 3. ふるいにかける（√N までやれば十分）
+    // i * i <= n は「√Nまで」という意味
+    var i = 2
+    while (i * i <= n) {
+        // もし i が素数として残っていたら...
+        if (isPrime[i]) {
+            // i の倍数 (2*i, 3*i, ...) を全部消す
+            // j += i で倍数にジャンプしていく
+            for (j in i * 2..n step i) {
+                isPrime[j] = false
             }
-            i++
         }
-        return true
+        i++
     }
-        fun main() {
-            val q = readLine()!!.toInt()
-            repeat(q) {
-                val x = readLine()!!.toInt()
-                if (isprime(x)) {
-                    println("Yes")
-                } else {
-                    println("No")
-                }
-            }
 
-
-        }
-
-
+    // 結果出力
+    for (k in 0..n) {
+        if (isPrime[k]) print("$k ")
+    }
+}
