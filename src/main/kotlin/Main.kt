@@ -1,24 +1,29 @@
 import kotlin.math.max
 
-fun main() {
-    val (n, w) = readLine()!!.split(" ").map { it.toInt() }
-    val (weight, value) = readLine()!!.split(" ").map { it.toLong() }
-    val weightInt = weight.toInt()
 
-    val dp = Array(n + 1){ LongArray(w + 1){0L} }
+    fun isprime(x : Int) : Boolean {
+        if (x < 2) return false
+        var i = 2
+        while (i * i <= x) {
+            if (x % i == 0) {
+                return false
+            }
+            i++
+        }
+        return true
+    }
+        fun main() {
+            val q = readLine()!!.toInt()
+            repeat(q) {
+                val x = readLine()!!.toInt()
+                if (isprime(x)) {
+                    println("Yes")
+                } else {
+                    println("No")
+                }
+            }
 
-    dp[0][0] = 0
-    for(i in 1..n){
-        for(j in 0..w) {
-            val patternA = dp[i - 1][j]
-            if (j >= weight) {
-                val patternB = dp[i - 1][j - weightInt] + value
-                dp[i][j] = max(patternA, patternB)
-            }else -1
 
         }
-    }
-    println(dp[n][w])
-}
 
 
