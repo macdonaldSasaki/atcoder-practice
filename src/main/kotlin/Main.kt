@@ -1,27 +1,24 @@
-import kotlin.math.min
+import kotlin.math.max
 
 fun main() {
-    val (n, s) = readLine()!!.split(" ").map { it.toInt() }
-    val a = readLine()!!.split(" ").map { it.toInt() }
+    val (n, w) = readLine()!!.split(" ").map { it.toInt() }
+    val (weight, value) = readLine()!!.split(" ").map { it.toLong() }
+    val weightInt = weight.toInt()
 
-    val dp = Array(n + 1) { BooleanArray(s + 1) }
-    dp[0][0] = true
+    val dp = Array(n + 1){ LongArray(w + 1){0L} }
 
-    for (i in 1..n) {
-        val card = a[i - 1]
-        for (j in 0..s) {
+    dp[0][0] = 0
+    for(i in 1..n){
+        for(j in 0..w) {
             val patternA = dp[i - 1][j]
-            val patternB = if(j >= card) dp[i -1][j - card] else false
-
-            if(patternA || patternB){
-                dp[i][j] = true
-            }
+            if (j >= weight) {
+                val patternB = dp[i - 1][j - weightInt] + value
+                dp[i][j] = max(patternA, patternB)
+            }else -1
 
         }
-
-
     }
-    if(dp[n][s]) println("yes")else println("no")
+    println(dp[n][w])
 }
 
 
