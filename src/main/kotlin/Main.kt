@@ -3,14 +3,26 @@
 import kotlin.math.max
 
 fun main() {
-   var (n,m) = readLine()!!.split(" ").map { it.toLong() }
-    while(n >= 1 && m >= 1){
-        if(n >= m){
-             n = n % m
-        }else{
-            m = m % n
-        }
+  val n = readLine()!!.toInt()
+    var current = 0
 
+    repeat(n){
+   val line = readLine()!!.split("")
+    val t = line[0]
+    val a = line[1].toInt()
+
+      if(t == "+"){
+        current += a
+      }else if(t == "-"){
+        current -= a
+      }else if(t == "*"){
+        current *= a
+      }
+      current %= 10000
+      if(current < 0){
+        current += 10000
+      }
+      println(current)
     }
-    if(n != 0L)println(n) else println(m)
+
 }
