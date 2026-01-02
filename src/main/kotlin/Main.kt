@@ -3,10 +3,20 @@
 import kotlin.math.max
 
 fun main() {
-   val (n,k) = readLine()!!.split(" ").map { it.toLong() }
-    if(k >= 2 * n - 2 && k % 2 == 0L){
-        println("Yes")
-    }else{
-        println("No")
+ val q = readLine()!!.toInt()
+    val score = mutableMapOf<String,Int>()
+
+    repeat(q){
+        val input = readLine()!!.split(" ")
+        val type = input[0].toInt()
+
+        if(type == 1){
+            val x = input[1]
+            val y = input[2].toInt()
+            score[x] = y
+        }else{
+            val x = input[1]
+            println(score[x])
+        }
     }
 }
