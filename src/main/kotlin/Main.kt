@@ -21,12 +21,12 @@ fun main() {
         denominator = (denominator * i) % m
     }
 
-    val inverse = power(denominator, m - 2, m)
+    val inverse = power(denominator, m - 2, m)//　ｍは奇数、
 
     println((numerator * inverse) % m)
 }
 
-fun power(base: Long, exponent: Long, mod: Long): Long {
+fun power(base: Long, exponent: Long, mod: Long): Long {　// ここで÷4の逆数＊inverseを作る（ｘ＾ｍ‐2）工程は繰り返し二累乗法と同じ
     var p = base
     var q = exponent
     var ans = 1L
