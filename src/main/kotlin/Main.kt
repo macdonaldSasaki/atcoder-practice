@@ -1,28 +1,19 @@
-import kotlin.math.*
+
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val movie = MutableList(n) {
-        val line = readLine()!!.split(" ").map { it.toInt() }
-        line[0] to line[1]
-    }
-    movie.sortBy { it.second }
+    var n = readLine()!!.toInt()
+    val s = mutableSetOf<Int>()
 
-    var count = 0
-    var finish = 0
+    while (n != 1 && !s.contains(n)) {
+        s.add(n)
 
-    for(x in movie){
-        val start = x.first
-        val end = x.second
-
-        if(start >= finish){
-            finish = end
-            count++
-
+        var t = 0
+        n.toString().forEach { c ->
+            val d = c.toString().toInt()
+            t += d * d
         }
+        n = t
     }
-println(count)
-
-
+    if(n == 1) println("Yes") else println("No")
 }
 
