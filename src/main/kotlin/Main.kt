@@ -1,22 +1,18 @@
 
 
-import kotlin.math.max
-
 fun main() {
- val q = readLine()!!.toInt()
-    val score = mutableMapOf<String,Int>()
+    val (n, k) = readLine()!!.split(" ").map { it.toLong() }
+    val a = readLine()!!.split(" ").map { it.toLong() }
 
-    repeat(q){
-        val input = readLine()!!.split(" ")
-        val type = input[0].toInt()
+    val map = mutableMapOf<Long, Long>()
+    var count = 0L
 
-        if(type == 1){
-            val x = input[1]
-            val y = input[2].toInt()
-            score[x] = y
-        }else{
-            val x = input[1]
-            println(score[x])
-        }
+    for (x in a) {
+        // 過去の自分たちの中に相方が何人いるか確認
+        count += map.getOrDefault(k - x, 0L)
+
+        // 自分自身をMapに登録（または個数を+1）
+        map[x] = map.getOrDefault(x, 0L) + 1L
     }
+    println(count)
 }
