@@ -1,37 +1,28 @@
 import kotlin.math.*
 
 fun main() {
- val n = readLine()!!.toInt()
-    val x = DoubleArray(n)
-    val y = DoubleArray(n)
+    val n = readLine()!!.toInt()
+    val movie = MutableList(n) {
+        val line = readLine()!!.split(" ").map { it.toInt() }
+        line[0] to line[1]
+    }
+    movie.sortBy { it.second }
 
-    for(i in 0 until n){
-        val line = readLine()!!.split("")
-        x[i] = line[0].toDouble()
-        y[i] = line[1].toDouble()
+    var count = 0
+    var finish = 0
 
-        val visited = BooleanArray(n)
-        var now = 0
-        visited[0] = true
-        println(1)
+    for(x in movie){
+        val start = x.first
+        val end = x.second
 
-        repeat(n - 1){
-            var next = -1
-            var min = Double.MAX_VALUE
+        if(start >= finish){
+            finish = end
+            count++
 
-            for(i in 0 until n){
-                if(!visited[i]){
-                    val d = sqrt((x[now] - x[i]).pow(2) + (y[now] + y[i]).pow(2))
-                if(d < min){
-                    min = d
-                    next = i
-                }
-                }
-            }
-            visited[next] = true
-            println(next + 1)
-            now = next
         }
     }
-    println(1)
+println(count)
+
+
 }
+
