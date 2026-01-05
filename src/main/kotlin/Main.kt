@@ -1,19 +1,13 @@
 
 
 fun main() {
-    val (n,m,b) = readLine()!!.split(" ").map { it.toInt() }
-    val c = b.toLong()
-    val x = readLine()!!.split(" ").map { it.toLong() }
-    val y = readLine()!!.split(" ").map { it.toLong() }
-    var sumA = 0L
-    var sumC = 0L
+val n = readLine()!!
+    val x = n.filter (Char :: isDigit ).toInt()
+    if(x >= 1 && x <= 349 && x != 316){
+        println("Yes")
+    }else{
+        println("No")
+    }
 
-    for(i in 0 until n){
-        sumA += x[i]
-    }
-    for(d in 0 until m){
-        sumC += y[d]
-    }
-    println((sumA * m.toLong()) + (n.toLong() * m.toLong() * c) + (sumC * n.toLong()))
 }
 
