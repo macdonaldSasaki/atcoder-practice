@@ -6,4 +6,3 @@ fun main() {
     println(x)
 }
 
-git add . git commit -m "A"  git push
