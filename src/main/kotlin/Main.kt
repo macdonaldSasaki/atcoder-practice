@@ -1,14 +1,13 @@
 
 
-fun main() {
-    val n = readLine()!!.toInt()
-    val a = readLine()!!.split(" ").map { it.toInt() }
-    val b = a.toMutableList()
-    b.sort()
-    val one = a.indexOf(b[0]) + 1
-    val two = a.indexOf(b[1]) + 1
-    val three = a.indexOf(b[2]) + 1
+fun main(){
+    var n = readLine()!!.toInt()
+    val coins = intArrayOf(500, 100, 50, 10, 5, 1)
+    var count = 0
 
-    println("$one $two $three")
+    for(i in coins){
+        count += n / i
+        n %= i
+    }
+    println(count)
 }
-
