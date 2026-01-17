@@ -1,13 +1,25 @@
 
 
 fun main() {
-    val input = readLine()!!.split(" ")
-    val d = input[0].toInt()
-    val f = input[1].toInt()
+    val n = readLine()!!.toInt()
+    val a = readLine()!!.split(" ")
 
-    val r = (d - f) % 7
-    val a = 7 - r
+    val s = IntArray(n)
+    var t =  0
 
-    println(a)
+    for(i in 0 .. n - 1){
+        val v = a[i].toInt()
+        s[t] = v
+        t ++
+
+        if(t >= 4){
+            val c = s[t - 1]
+            if(s[t - 2] == c && s[t - 3] == c && s[t - 4] == c){
+                t-=4
+            }
+        }
     }
+    println(t)
+}
+
 
