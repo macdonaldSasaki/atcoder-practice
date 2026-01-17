@@ -1,25 +1,24 @@
-
+import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val a = readLine()!!.split(" ")
+    val h = readLine()!!.split(" ").map { it.toInt() }
+    val d = h[0]
+    val t = h[2]
 
-    val s = IntArray(n)
-    var t =  0
+    val a = List(d) {
+        readLine()!!.split(" ").map { it.toInt() }
+    }
+    val c = IntArray(d)
 
-    for(i in 0 .. n - 1){
-        val v = a[i].toInt()
-        s[t] = v
-        t ++
+    repeat(t) {
+        val x = readLine()!!.toInt()
 
-        if(t >= 4){
-            val c = s[t - 1]
-            if(s[t - 2] == c && s[t - 3] == c && s[t - 4] == c){
-                t-=4
+        for (i in 0 until d) {
+            if (a[i].contains(x)) {
+                c[i]++
             }
         }
     }
-    println(t)
+        println(c.maxOrNull() ?: 0)
+
 }
-
-
