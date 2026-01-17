@@ -1,38 +1,29 @@
 
 
 fun main() {
-    val T = readLine()!!.toInt()
-    repeat(T) {
-        val (N, W) = readLine()!!.split(" ").map { it.toInt() }
-        val C = readLine()!!.split(" ").map { it.toLong() }
+val n = readLine()!!.toInt()
+    var x : Long = 0
+    var y : Long = 0
+    val c = IntArray(n + 1)
+    for(i in 1 .. n){
+        val x1 = i.toLong()
+        x = x1 * x1
+        if(x > n) break
+        for(l in i + 1 .. n){
+            val y1 = l.toLong()
+            y = y1 * y1
+            val z = x + y
+            if(z > n) break
+               c[z.toInt()]++
 
-        // N <= W のときは黒を0にできる
-        if (N <= W) {
-            println(0)
-            return@repeat
+
+            }
         }
-
-        // 配列を2倍にして円環を直線化
-        val A = LongArray(2 * N)
-        for (i in 0 until N) {
-            A[i] = C[i]
-            A[i + N] = C[i]
-        }
-
-        // 累積和
-        val pref = LongArray(2 * N + 1)
-        for (i in 0 until 2 * N) {
-            pref[i + 1] = pref[i] + A[i]
-        }
-
-        // 長さWの連続区間（黒ブロック）を全探索
-        var ans = Long.MAX_VALUE
-        for (l in 0 until N) {
-            val r = l + W
-            val cost = pref[r] - pref[l]
-            if (cost < ans) ans = cost
-        }
-
-        println(ans)
+    val a = ArrayList<Int>()
+    for (i in 1..n) {
+        if (c[i] == 1) a.add(i)
     }
-}
+    println(a.size)
+    println(a.joinToString(" "))
+    }
+
