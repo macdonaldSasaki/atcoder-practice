@@ -1,29 +1,27 @@
 import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val grid = Array(n) { IntArray(n) { -1 } }
-    grid[0][(n - 1) / 2] = 1
-    var r = 0
-    var c =(n - 1) / 2
-    var k = 1
-    val z = n * n - 1
+    val input1 = readLine()!!.split(" ")
+    val n = input1[0].toInt()
+    val k = input1[1].toInt()
+    val x = input1[2].toLong()
 
-    repeat(z){
-        k ++
-        var x = r
-        var y = c
-        r = (r - 1 + n) % n
-        c = (c + 1) % n
-        if(grid[r][c] == -1){
-            grid[r][c] = k
-        }else{
-            r = (x + 1) % n
-            grid[r][y] = k
-            c = y
+    val a = readLine()!!.split(" ").map { it.toLong() }.sortedDescending()
+
+    // 水（ゴミ）になる個数
+    val w = n - k
+
+    var sum = 0L
+
+    // ゴミの次から調べ始める
+    for (i in w until n) {
+        sum += a[i]
+        if (sum >= x) {
+            println(i + 1) // インデックスは0始まりなので+1個
+            return
         }
     }
-    for(i in 0 until n){
-        println(grid[i].joinToString(" "))
-    }
+
+    // 最後まで足しても無理なら
+    println("-1")
 }
