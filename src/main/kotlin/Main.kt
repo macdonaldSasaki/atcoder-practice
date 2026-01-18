@@ -1,27 +1,22 @@
 import kotlin.math.max
 
 fun main() {
-    val input1 = readLine()!!.split(" ")
-    val n = input1[0].toInt()
-    val k = input1[1].toInt()
-    val x = input1[2].toLong()
+    val a = readLine()!!.split(" ")
+    val n = a[0].toInt()
+    val m = a[1].toInt()
 
-    val a = readLine()!!.split(" ").map { it.toLong() }.sortedDescending()
+    val s = DoubleArray(m + 1)
+    val c = IntArray(m + 1)
 
-    // 水（ゴミ）になる個数
-    val w = n - k
-
-    var sum = 0L
-
-    // ゴミの次から調べ始める
-    for (i in w until n) {
-        sum += a[i]
-        if (sum >= x) {
-            println(i + 1) // インデックスは0始まりなので+1個
-            return
-        }
+    repeat(n) {
+        val b = readLine()!!.split(" ")
+        val k = b[0].toInt()
+        val v = b[1].toInt()
+        s[k] += v.toDouble()
+        c[k] += 1
     }
 
-    // 最後まで足しても無理なら
-    println("-1")
+    for (i in 1..m) {
+        println(s[i] / c[i])
+    }
 }
