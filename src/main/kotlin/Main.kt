@@ -2,22 +2,25 @@ import kotlin.math.max
 
 
 fun main() {
-    val a = readLine()!!.toInt()
-    var voice = 0
-    var count3 = 0
-    repeat(a) {
-        val x = readLine()!!.toInt()
-        when (x) {
-            1 -> voice++
-            2 -> if (voice >= 1) voice--
-            3 -> count3 = 1 - count3
-        }
+    val (x, y) = readLine()!!.split(" ").map { it.toInt() }
+    val d = IntArray(x + 1)
 
-        if(voice >= 3 && count3 == 1){
-            println("Yes")
-        }else{
-            println("No")
+    repeat(y) {
+        val (u, v) = readLine()!!.split(" ").map { it.toInt() }
+        d[u]++
+        d[v]++
+    }
+    val r = LongArray(x)
+    for (i in 1..x) {
+        val k = (x - 1 - d[i]).toLong()
+        if (k < 3) {
+            r[i - 1] = 0
+        } else {
+            val v = (0..2).fold(1L) { a, b -> a * (k - b) }
+            r[i - 1] = v / 6
         }
     }
+    println(r.joinToString(" "))
 }
+
 
