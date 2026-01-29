@@ -1,28 +1,29 @@
 import kotlin.math.max
 
-fun main(){
-    val s = readLine()!!.split(" ")
-    val n = s[0].toInt()
-    val m = s[1].toInt()
-    val d = IntArray(n + 1)
-
-    repeat(m){
-        val t = readLine()!!.split(" ")
-        val u = t[0].toInt()
-        val v = t[1].toInt()
-        d[u]++
-        d[v]++
-    }
-
-    val r = LongArray(n)
-    for(i in 1..n){
-        val k = (n - 1 - d[i] ).toLong()
-        if(k < 3){
-            r[i - 1] = 0
-        }else{
-            r[i - 1] = k * (k - 1) * (k - 2) / 6
+fun main() {
+    val t = readLine()!!.toInt()
+    repeat(t) {
+        val n = readLine()!!.toInt()
+        var s = 0L
+        val c = LongArray(n)
+        for (i in 0 until n) {
+            val f = readLine()!!.split(" ")
+            val w = f[0].toLong()
+            val p = f[1].toLong()
+            s += p
+            c[i] = w + p
         }
+        c.sort()
+        var a = 0
+        var u = 0L
+        for(x in c){
+            if(x + u <= s){
+                u += x
+                a++
+            }else{
+                break
+            }
+        }
+        println(a)
     }
-
-println(r.joinToString (" "))
 }
