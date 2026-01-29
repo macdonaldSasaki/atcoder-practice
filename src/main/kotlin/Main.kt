@@ -1,30 +1,22 @@
 import kotlin.math.max
 
 fun main() {
-    val s1 = readLine()!!.split(" ")
-    val n = s1[0].toLong()
-    val m = s1[1].toInt()
-    val b = n + 1
-    val h = mutableSetOf<Long>()
-    var a = 0
+    val n = readLine()!!.toInt()
+    val s = readLine()!!.split(" ")
+    val b = IntArray(n + 1)
 
-    repeat(m) {
-        val s2 = readLine()!!.split(" ")
-        val r = s2[0].toLong()
-        val c = s2[1].toLong()
-
-        var f = false
-        for (x in -1.. 1){
-            for(y in -1 .. 1){
-                if(h.contains((r + x) * b + (c + y))){
-                    f = true
-                }
+    for(i in 0 until n ){
+        b[i + 1] = s[i].toInt()
+    }
+    for(i in 1..n){
+        var r = -1
+        for(o in i - 1 downTo 1){
+            if(b[i] > b[o]){
+                r = o
+                break
             }
         }
-        if(!f){
-            h.add(r * b + c)
-            a++
-        }
+        println(r)
     }
-    println(a)
+
 }
