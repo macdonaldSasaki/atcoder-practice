@@ -1,8 +1,8 @@
 import kotlin.math.max
 
 fun main() {
-    val t = readLine()!!.toInt()
-    repeat(t) {
+    val s1 = readLine()!!.toInt()
+    repeat(s1) {
         val n = readLine()!!.toInt()
         var s = 0L
         val c = LongArray(n)
@@ -14,14 +14,19 @@ fun main() {
             c[i] = w + p
         }
         c.sort()
+
+        val k = LongArray(n + 1)
+        for(i in 0 until n) k[i + 1] = k[i] + c[i]
+        var l = 0
+        var r = n
         var a = 0
-        var u = 0L
-        for(x in c){
-            if(x + u <= s){
-                u += x
-                a++
+        while(l <= r){
+            val m = (l + r) / 2
+            if(k[m] <= s){
+                a = m
+                l = m + 1
             }else{
-                break
+                r = m - 1
             }
         }
         println(a)
