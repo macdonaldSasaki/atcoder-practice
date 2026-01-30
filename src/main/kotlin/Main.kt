@@ -1,22 +1,20 @@
 import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!.toInt()
-    val s = readLine()!!.split(" ")
-    val b = IntArray(n + 1)
-
-    for(i in 0 until n ){
-        b[i + 1] = s[i].toInt()
-    }
-    for(i in 1..n){
-        var r = -1
-        for(o in i - 1 downTo 1){
-            if(b[i] > b[o]){
-                r = o
-                break
-            }
+    val n = readLine()!!
+    val l = n.map { it.toString().toInt() }.sorted().toMutableList()
+    var c = 0
+    for (i in 0 until l.size) {
+        if (l[i] == 0) {
+            c++ // 0のときはカウントを増やす
+            continue
+        } else {
+            // ここで c++ してはダメ。今の c が「0以外の最初の位置」を指している
+            break
         }
-        println(r)
     }
-
+    val z = l[0]
+    l[0] = l[c]
+    l[c] = z
+    println(l.joinToString(""))
 }
