@@ -1,20 +1,32 @@
 import kotlin.math.max
 
 fun main() {
-    val n = readLine()!!
-    val l = n.map { it.toString().toInt() }.sorted().toMutableList()
-    var c = 0
-    for (i in 0 until l.size) {
-        if (l[i] == 0) {
-            c++ // 0のときはカウントを増やす
-            continue
-        } else {
-            // ここで c++ してはダメ。今の c が「0以外の最初の位置」を指している
-            break
+    val s = readLine()!!
+    val n = s.length
+    if (n == 0) {
+        println(0)
+        return
+    }
+
+    val v = mutableListOf<Int>()
+    val l = mutableListOf<Int>()
+    var i = 0
+    while (i < n) {
+        var j = i
+        while (j < n && s[j] == s[i]) {
+            j++
+        }
+        v.add(s[i] - '0')
+        l.add(j - i)
+        i = j
+    }
+
+    var a: Long = 0
+    for (k in 0 until v.size - 1) {
+        if (v[k] + 1 == v[k + 1]) {
+            val m = if (l[k] < l[k + 1]) l[k] else l[k + 1]
+            a += m.toLong()
         }
     }
-    val z = l[0]
-    l[0] = l[c]
-    l[c] = z
-    println(l.joinToString(""))
+    println(a)
 }
