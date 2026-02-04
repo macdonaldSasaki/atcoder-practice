@@ -1,20 +1,34 @@
 import kotlin.math.abs
 
 fun main() {
-  val n = readLine()!!.toInt()
-  var a = 0
-  var b = 0
-  var c = 0
-  repeat(n){
-    val (t, x, y) = readLine()!!.split(" ").map { it.toInt() }
-    val a1 = t - a
-    val a2 = abs(x - b) + abs(y - c)
-    val a3 = abs(a1 - a2)
-    if(a1 < a2 || a3 % 2 != 0){
-      println("No")
-      return
+  val (h, w) = readLine()!!.split(" ").map { it.toInt() }
+  val s = Array(h) { readLine()!! }
+
+  val dy = intArrayOf(-1,1,0,0)
+  val dx = intArrayOf(0,0,-1,1)
+
+  for(i in 0 until h){
+    for(j in 0 until w){
+
+      if(s[i][j] == '#'){
+        var ok = false
+         for(k in 0 until 4){
+           val ni = i + dy[k]
+           val nj = j + dx[k]
+
+           if(ni >= 0 && ni < h && nj >= 0 && nj < w){
+             if(s[ni][nj] == '#'){
+               ok = true
+             }
+           }
+         }
+        if(!ok){
+          println("No")
+          return
+        }
+      }
+
     }
-    a = t ; b = x ; c = y
   }
   println("Yes")
 }
