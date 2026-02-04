@@ -1,29 +1,20 @@
-import kotlin.math.max
+import kotlin.math.abs
 
 fun main() {
-    var i = readLine()!!.split(" ")
-    var n = i[0].toInt()
-    var t = i[1].toLong()
-    var w = 0L
-    var o = 0L
-    var s = true
-    if (n > 0) {
-        var a = readLine()!!.split(" ").map { it.toLong() }
-        for (p in a) {
-            if (p >= o) {
-                s = true
-            } else {
-                s = false
-            }
-            if (s == true) {
-                w += (p - o)
-                o = p + 100
-                s = false
-            }
-        }
+  val n = readLine()!!.toInt()
+  var a = 0
+  var b = 0
+  var c = 0
+  repeat(n){
+    val (t, x, y) = readLine()!!.split(" ").map { it.toInt() }
+    val a1 = t - a
+    val a2 = abs(x - b) + abs(y - c)
+    val a3 = abs(a1 - a2)
+    if(a1 < a2 || a3 % 2 != 0){
+      println("No")
+      return
     }
-    if (o < t) {
-        w = w + (t - o)
-    }
-    println(w)
+    a = t ; b = x ; c = y
+  }
+  println("Yes")
 }
