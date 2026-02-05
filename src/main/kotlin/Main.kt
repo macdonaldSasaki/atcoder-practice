@@ -2,21 +2,40 @@ import kotlin.math.abs
 import kotlin.math.*
 
 fun main() {
-val n = readLine()!!.toLong()
-    var min = 11
-    var i = 1L
-    while(i * i <= n){
-        if(n % i == 0L){
-            val a = i
-            val b = n / i
-            val a1 = a.toString().length
-            val b1 = b.toString().length
+    val s = readLine()!!
+    val a = s[0] - '0'
+    val b = s[1] - '0'
+    val c = s[2] - '0'
+    val d = s[3] - '0'
 
-            val f = max(a1,b1)
-            min = min(min,f)
+    for(i in 0 until (1 shl 3)){
+        var sum = a
+        var ans = "$a"
+
+        if((i shr 0) and 1 == 1){
+            sum += b
+            ans += "+$b"
+        }else{
+            sum -= b
+            ans += "-$b"
         }
-        i++
+        if ((i shr 1) and 1 == 1) {
+            sum += c
+            ans += "+$c"
+        } else {
+            sum -= c
+            ans += "-$c"
+        }
+        if ((i shr 2) and 1 == 1) {
+            sum += d
+            ans += "+$d"
+        } else {
+            sum -= d
+            ans += "-$d"
+        }
+        if(sum == 7){
+            println("$ans=7")
+            return
+        }
     }
-    println(min)
-
 }
