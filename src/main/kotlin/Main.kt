@@ -1,41 +1,23 @@
 import kotlin.math.abs
 import kotlin.math.*
+import kotlin.math.min
 
 fun main() {
+val (n,q) = readLine()!!.split(" ").map { it.toInt() }
     val s = readLine()!!
-    val a = s[0] - '0'
-    val b = s[1] - '0'
-    val c = s[2] - '0'
-    val d = s[3] - '0'
 
-    for(i in 0 until (1 shl 3)){
-        var sum = a
-        var ans = "$a"
+    val t = IntArray(n + 1)
 
-        if((i shr 0) and 1 == 1){
-            sum += b
-            ans += "+$b"
+    for(i in 1 until n){
+        if(s[i] == 'C' && s[i - 1] == 'A'){
+            t[i + 1] = t[i] + 1
         }else{
-            sum -= b
-            ans += "-$b"
-        }
-        if ((i shr 1) and 1 == 1) {
-            sum += c
-            ans += "+$c"
-        } else {
-            sum -= c
-            ans += "-$c"
-        }
-        if ((i shr 2) and 1 == 1) {
-            sum += d
-            ans += "+$d"
-        } else {
-            sum -= d
-            ans += "-$d"
-        }
-        if(sum == 7){
-            println("$ans=7")
-            return
+            t[i + 1] = t[i]
         }
     }
+    repeat(q){
+        val(l,r) = readLine()!!.split(" ").map { it.toInt() }
+        println(t[r] - t[l])
+    }
+
 }
